@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "9a18cc6a-1039-4fbd-a788-5f264dc6d8c1",
+		"name": "Backend Node.js Firebase DB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25862457"
+	},
+	"item": [
+		{
+			"name": "Get All Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All User from Game ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/{{gameId}}",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"{{gameId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Details from Game Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tokenID\": \"your_token_id\",\r\n  \"loginTime\": \"2022-02-21 12:00:00\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/{{gameId}}/{{user}}",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"{{gameId}}",
+						"{{user}}"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"currentScore\": 12\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/{{gameId}}/{{username}}/login",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"{{gameId}}",
+						"{{username}}",
+						"login"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total Score",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"totalScore\": 5,\r\n  \"ts_time\": \"2022-02-21 12:00:00\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/{{gameId}}/{{username}}/totalscore",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"{{gameId}}",
+						"{{username}}",
+						"totalscore"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tokens Request",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tokensreq\": 15,\r\n  \"txnHash\": \"asd65s6d1a6sd5\",\r\n  \"tr_time\" : \"essok\",\r\n  \"timestamp\" : 54545545\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/{{gameId}}/{{username}}/tokensreq",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"{{gameId}}",
+						"{{username}}",
+						"tokensreq"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tokens Claimed",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tokensclaim\": 100,\r\n    \"tc_time\": \"2022-02-22T12:00:00Z\",\r\n    \"date\": \"2022-02-22\",\r\n    \"amount\": 10\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/{{gameId}}/{{username}}/tokensclaim",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"{{gameId}}",
+						"{{username}}",
+						"tokensclaim"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "gameId",
+			"value": "gameTest",
+			"type": "string"
+		},
+		{
+			"key": "user",
+			"value": "unta",
+			"type": "string"
+		},
+		{
+			"key": "username",
+			"value": "unta"
+		}
+	]
+}
