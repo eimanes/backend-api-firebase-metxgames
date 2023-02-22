@@ -51,7 +51,7 @@ app.get("/", async (req, res) => {
 
 
 //get list of users
-app.get("/:gameID", verifyToken, async (req, res) => {
+app.get("/api/:gameID", verifyToken, async (req, res) => {
     try {
       const { gameID } = req.params;
       const ref = admin.database().ref(`${gameID}`);
@@ -64,7 +64,7 @@ app.get("/:gameID", verifyToken, async (req, res) => {
     }
 });
 
-app.get("/:gameID/:user", verifyToken, async (req, res) => {
+app.get("/api/:gameID/:user", verifyToken, async (req, res) => {
     try {
       const { gameID, user } = req.params;
       const ref = admin.database().ref(`${gameID}/${user}`);
@@ -78,7 +78,7 @@ app.get("/:gameID/:user", verifyToken, async (req, res) => {
   });
   
   
-  app.put("/:gameID/:user/login", async (req, res) => {
+  app.put("/api/:gameID/:user/login", async (req, res) => {
     try {
       const { gameID, user } = req.params;
       const { username, tokenID, time } = req.query;
@@ -108,7 +108,7 @@ app.get("/:gameID/:user", verifyToken, async (req, res) => {
   });
   
 
-app.put("/:gameID/:user/totalscore", verifyToken, async (req, res) => {
+app.put("/api/:gameID/:user/totalscore", verifyToken, async (req, res) => {
     try {
       const { gameID, user } = req.params;
       const score = parseInt(req.query.score);
@@ -131,7 +131,7 @@ app.put("/:gameID/:user/totalscore", verifyToken, async (req, res) => {
     }
   });
 
-app.put("/:gameID/:user/tokensreq", verifyToken, async (req, res) => {
+app.put("/api/:gameID/:user/tokensreq", verifyToken, async (req, res) => {
     try {
       const { gameID, user } = req.params;
       const amount = parseInt(req.query.amount);
@@ -157,7 +157,7 @@ app.put("/:gameID/:user/tokensreq", verifyToken, async (req, res) => {
     }
   });
 
-app.put("/:gameID/:user/tokensclaim", verifyToken, async (req, res) => {
+app.put("/api/:gameID/:user/tokensclaim", verifyToken, async (req, res) => {
     try {
       const { gameID, user } = req.params;
       const amount = parseInt(req.query.amount);
