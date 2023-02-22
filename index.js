@@ -86,7 +86,7 @@ app.get("/:gameID/:user", verifyToken, async (req, res) => {
       const ref = admin.database().ref(`${gameID}/${user}/a_General`);
       await ref.update({ a_TokenID: tokenID, b_LoginTime: time });
       
-      const token = jwt.sign({ username }, secretKey, { expiresIn: null }); // Generate token with username
+      const token = jwt.sign({ username }, secretKey, { expiresIn: '2h' }); // Generate token with username
       
       const viewModel = {
         success: true,
