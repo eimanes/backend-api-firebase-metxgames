@@ -7,7 +7,7 @@
         {
         "src": "/",
         "methods": ["GET"],
-        "dest": "/api"
+        "dest": "/"
       },
       {
         "src": "/:gameID",
@@ -23,22 +23,22 @@
       {
         "src": "/:gameID/:user/login",
         "methods": ["PUT"],
-        "dest": "/api/login"
+        "dest": "/api/:gameID/:user/login"
       },
       {
         "src": "/:gameID/:user/totalscore",
         "methods": ["PUT"],
-        "dest": "/api/totalscore"
+        "dest": "/api/:gameID/:user/totalscore"
       },
       {
         "src": "/:gameID/:user/tokensreq",
         "methods": ["PUT"],
-        "dest": "/api/tokensreq"
+        "dest": "/api/:gameID/:user/tokensreq"
       },
       {
         "src": "/:gameID/:user/tokensclaim",
         "methods": ["PUT"],
-        "dest": "/api/tokensclaim"
+        "dest": "/api:gameID/:user/tokensclaim"
       }
     ],
     "env": {
