@@ -1,0 +1,48 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "index.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+        {
+        "src": "/",
+        "methods": ["GET"],
+        "dest": "/api"
+      },
+      {
+        "src": "/:gameID",
+        "methods": ["GET"],
+        "dest": "/api/:gameID"
+      },
+      {
+        "src": "/:gameID/:user",
+        "methods": ["GET"],
+        "dest": "/api/:gameID/:user"
+      },
+      
+      {
+        "src": "/:gameID/:user/login",
+        "methods": ["PUT"],
+        "dest": "/api/login"
+      },
+      {
+        "src": "/:gameID/:user/totalscore",
+        "methods": ["PUT"],
+        "dest": "/api/totalscore"
+      },
+      {
+        "src": "/:gameID/:user/tokensreq",
+        "methods": ["PUT"],
+        "dest": "/api/tokensreq"
+      },
+      {
+        "src": "/:gameID/:user/tokensclaim",
+        "methods": ["PUT"],
+        "dest": "/api/tokensclaim"
+      }
+    ],
+    "env": {
+      "SECRET_KEY": "metx-games-secure-18-01-2023"
+    }
+  }
+  
