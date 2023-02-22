@@ -37,7 +37,7 @@ const verifyToken = (req, res, next) => {
 };
 
 // Define your routes here
-app.get("/", verifyToken, async (req, res) => {
+app.get("/", async (req, res) => {
     try {
       const snapshot = await admin.database().ref().once("value");
       const data = snapshot.val();
