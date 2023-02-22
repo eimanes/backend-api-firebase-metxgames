@@ -10,28 +10,28 @@
         "dest": "/"
       },
       {
-        "src": "/:gameID",
+        "src": "/api/:gameID",
         "methods": ["GET"],
         "dest": "/api/:gameID"
       },
       {
-        "src": "/:gameID/:user",
+        "src": "/api/:gameID/:user",
         "methods": ["GET"],
         "dest": "/api/:gameID/:user"
       },
       
       {
-        "src": "/:gameID/:user/login",
+        "src": "/api/:gameID/:user/login",
         "methods": ["PUT"],
         "dest": "/api/:gameID/:user/login"
       },
       {
-        "src": "/:gameID/:user/totalscore",
+        "src": "/api/:gameID/:user/totalscore",
         "methods": ["PUT"],
         "dest": "/api/:gameID/:user/totalscore"
       },
       {
-        "src": "/:gameID/:user/tokensreq",
+        "src": "/api/:gameID/:user/tokensreq",
         "methods": ["PUT"],
         "dest": "/api/:gameID/:user/tokensreq"
       },
