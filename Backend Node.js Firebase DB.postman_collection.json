@@ -94,11 +94,16 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer metx-games-secure-18-01-2023",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"currentScore\": 12\r\n}\r\n",
+					"raw": "{\r\n  \"username\": \"myusername\",\r\n  \"tokenID\": \"mytokenid\",\r\n  \"loginTime\": \"2023-02-20T12:34:56Z\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -106,7 +111,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{api_url}}/{{gameId}}/{{username}}/login",
+					"raw": "{{api_url}}/{{gameId}}/{{username}}/login?username=myusername&tokenID=mytokenid&time=2023-02-20T12:34:56Z",
 					"host": [
 						"{{api_url}}"
 					],
@@ -117,9 +122,16 @@
 					],
 					"query": [
 						{
-							"key": "",
-							"value": null,
-							"disabled": true
+							"key": "username",
+							"value": "myusername"
+						},
+						{
+							"key": "tokenID",
+							"value": "mytokenid"
+						},
+						{
+							"key": "time",
+							"value": "2023-02-20T12:34:56Z"
 						}
 					]
 				}
@@ -147,20 +159,23 @@
 					}
 				},
 				"url": {
-					"raw": "{{api_url}}/{{gameId}}/{{username}}/totalscore",
+					"raw": "{{api_url}}/{{gameId}}/{{user}}/totalscore?score=6&time=2022-02-21 12:00:00",
 					"host": [
 						"{{api_url}}"
 					],
 					"path": [
 						"{{gameId}}",
-						"{{username}}",
+						"{{user}}",
 						"totalscore"
 					],
 					"query": [
 						{
-							"key": "",
-							"value": null,
-							"disabled": true
+							"key": "score",
+							"value": "6"
+						},
+						{
+							"key": "time",
+							"value": "2022-02-21 12:00:00"
 						}
 					]
 				}
@@ -188,7 +203,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{api_url}}/{{gameId}}/{{username}}/tokensreq",
+					"raw": "{{api_url}}/{{gameId}}/{{username}}/tokensreq?amount=12&hash=saje&time=esok&timestamp=5161556",
 					"host": [
 						"{{api_url}}"
 					],
@@ -199,9 +214,20 @@
 					],
 					"query": [
 						{
-							"key": "",
-							"value": null,
-							"disabled": true
+							"key": "amount",
+							"value": "12"
+						},
+						{
+							"key": "hash",
+							"value": "saje"
+						},
+						{
+							"key": "time",
+							"value": "esok"
+						},
+						{
+							"key": "timestamp",
+							"value": "5161556"
 						}
 					]
 				}
@@ -229,20 +255,23 @@
 					}
 				},
 				"url": {
-					"raw": "{{api_url}}/{{gameId}}/{{username}}/tokensclaim",
+					"raw": "{{api_url}}/{{gameId}}/{{user}}/tokensclaim?amount=100&time=2022-02-22T12:00:00Z",
 					"host": [
 						"{{api_url}}"
 					],
 					"path": [
 						"{{gameId}}",
-						"{{username}}",
+						"{{user}}",
 						"tokensclaim"
 					],
 					"query": [
 						{
-							"key": "",
-							"value": null,
-							"disabled": true
+							"key": "amount",
+							"value": "100"
+						},
+						{
+							"key": "time",
+							"value": "2022-02-22T12:00:00Z"
 						}
 					]
 				}
@@ -250,6 +279,16 @@
 			"response": []
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im15dXNlcm5hbWUiLCJpYXQiOjE2NzcwNDU2MjUsImV4cCI6MTY3NzA0OTIyNX0.UrR_ror6WlEFQrzOKbmgd0a4A5QBcSPKMcCgJCkrcF8",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -285,10 +324,6 @@
 			"key": "user",
 			"value": "unta",
 			"type": "string"
-		},
-		{
-			"key": "username",
-			"value": "unta"
 		}
 	]
 }
