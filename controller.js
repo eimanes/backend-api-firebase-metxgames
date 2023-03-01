@@ -1,6 +1,8 @@
 const admin = require("firebase-admin");
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const moment = require('moment-timezone');
+const timezone = 'Asia/Singapore';
 
 // Define the secret key for JWT token generation
 const secretKey = process.env.SECRET_KEY;
@@ -62,12 +64,14 @@ const getUserDetails = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { gameID, user } = req.params;
-        const { username, tokenID, time } = req.query;
+        const { username, tokenID } = req.query;
+        const now = moment().tz(timezone);
+        const time = now.format('YYYY-MM-DD HH:mm:ss');   
         
         const ref = admin.database().ref(`${gameID}/${user}/a_General`);
         await ref.update({ a_TokenID: tokenID, b_LoginTime: time });
         
-        const token = jwt.sign({ username }, secretKey, { expiresIn: '2h' }); // Generate token with username
+        const token = jwt.sign({ username }, secretKey, { expiresIn: '24h' }); // Generate token with username
         
         const viewModel = {
           success: true,
@@ -92,8 +96,8 @@ const totalScore = async (req, res) => {
   try {
     const { gameID, user } = req.params;
     const score = parseInt(req.query.score);
-    const now = new Date();
-    const time = now.toISOString();
+    const now = moment().tz(timezone);
+    const time = now.format('YYYY-MM-DD HH:mm:ss'); 
     const ref = admin.database().ref(`${gameID}/${user}/b_Score`);
     await ref.update({ d_TotalScore: score, e_TS_Updated: time });
     const viewModel = {
@@ -111,16 +115,43 @@ const totalScore = async (req, res) => {
   }
 };
 
+const tokensRequest = async (req, res) => {
+  try {
+    const { gameID, user } = req.params;
+    const amount = parseInt(req.query.amount);
+    const {hash} = req.query;
+    const now = moment().tz(timezone);
+    const time = now.format('YYYY-MM-DD HH:mm:ss'); 
+    const timestamp = parseInt(req.query.timestamp);
+    const ref = admin.database().ref(`${gameID}/${user}/c_TokensReq`);
+    await ref.update({ a_TokensReq: amount, b_TxnHash: hash, c_TR_Updated: time, d_TimeStamp: timestamp});
+    const viewModel = {
+      success: true,
+      message: "Tokens Requested updated",
+      data: {
+        amount,
+        hash,
+        time,
+        timestamp
+      },
+    };
+    return res.status(200).json(viewModel);
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send(error);
+  }
+};
 
 const tokensClaim = async (req, res) => {
     try {
         const { gameID, user } = req.params;
         const amount = parseInt(req.query.amount);
-        const now = new Date();
-        const time = now.toISOString();
+        const now = moment().tz(timezone);
+        const time = now.format('YYYY-MM-DD HH:mm:ss'); 
         const ref = admin.database().ref(`${gameID}/${user}/d_TokensClaim`);
         await ref.update({ g_TokensClaimed: amount, h_TC_Updated: time});
-        postHistory(gameID, user, req, amount, time);
+        postHistory(gameID, user, req);
         const viewModel = {
           success: true,
           message: "Tokens claimed updated",
@@ -136,10 +167,13 @@ const tokensClaim = async (req, res) => {
       }
 };
 
-function postHistory(gameID, user, amount, time){
-    const ref = admin.database().ref(`${gameID}/${user}/d_TokensClaim/z_History`);
-    ref.update({ time : amount });
-};
+function postHistory(gameID, user, req){
+  const amount = req.query;
+  const now = moment().tz(timezone);
+  const time = now.format('YYYY-MM-DD HH:mm:ss'); 
+  const ref = admin.database().ref(`${gameID}/${user}/d_TokensClaim/z_History`);
+  ref.update({ [time]:amount });
+}
 
 module.exports = {
     verifyToken,
@@ -148,5 +182,6 @@ module.exports = {
     getUserDetails,
     login,
     totalScore,
+    tokensRequest,
     tokensClaim
 };

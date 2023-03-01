@@ -18,6 +18,8 @@ route.put("/:gameID/:user/login", controller.login);
   
 route.put("/:gameID/:user/totalscore", verifyToken, controller.totalScore);
 
+route.put("/:gameID/:user/tokensreq", verifyToken, controller.tokensRequest);
+
 route.put("/:gameID/:user/tokensclaim", verifyToken, controller.tokensClaim);
 
 module.exports = route;
