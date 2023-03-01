@@ -1,14 +1,23 @@
 {
     "version": 2,
     "builds": [
-        {
-            "src": "./index.js",
-            "use": "@vercel/node"
-        }
+      {
+        "src": "index.js",
+        "use": "@vercel/node"
+      }
     ],
     "routes": [
-        {
-            "destination": "/"
-        }
+      {
+        "handle": "filesystem"
+      },
+      {
+        "src": "/(.*)",
+        "status": 200,
+        "headers": {
+          "cache-control": "public, max-age=0, must-revalidate"
+        },
+        "continue": true
+      }
     ]
   }
+  
