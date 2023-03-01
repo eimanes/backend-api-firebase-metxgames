@@ -89,36 +89,38 @@ const login = async (req, res) => {
 };
 
 const totalScore = async (req, res) => {
-    try {
-        const { gameID, user } = req.params;
-        const score = parseInt(req.query.score);
-        const time = req.query.time;
-        const ref = admin.database().ref(`${gameID}/${user}/b_Score`);
-        await ref.update({ d_TotalScore: score, e_TS_Updated: time});
-        const viewModel = {
-          success: true,
-          message: "Total score updated",
-          data: {
-            score,
-            time
-          },
-        };
-        return res.status(200).json(viewModel);
-  
-      } catch (error) {
-        console.error(error);
-        return res.status(500).send (error);
-      }
+  try {
+    const { gameID, user } = req.params;
+    const score = parseInt(req.query.score);
+    const now = new Date();
+    const time = now.toISOString();
+    const ref = admin.database().ref(`${gameID}/${user}/b_Score`);
+    await ref.update({ d_TotalScore: score, e_TS_Updated: time });
+    const viewModel = {
+      success: true,
+      message: "Total score updated",
+      data: {
+        score,
+        time
+      },
+    };
+    return res.status(200).json(viewModel);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send(error);
+  }
 };
+
 
 const tokensClaim = async (req, res) => {
     try {
         const { gameID, user } = req.params;
         const amount = parseInt(req.query.amount);
-        const time = req.query.time;
+        const now = new Date();
+        const time = now.toISOString();
         const ref = admin.database().ref(`${gameID}/${user}/d_TokensClaim`);
         await ref.update({ g_TokensClaimed: amount, h_TC_Updated: time});
-        postHistory(gameID, user, req);
+        postHistory(gameID, user, req, amount, time);
         const viewModel = {
           success: true,
           message: "Tokens claimed updated",
@@ -134,10 +136,9 @@ const tokensClaim = async (req, res) => {
       }
 };
 
-function postHistory(gameID, user, req){
-    const { date, amount } = req.query;
+function postHistory(gameID, user, amount, time){
     const ref = admin.database().ref(`${gameID}/${user}/d_TokensClaim/z_History`);
-    ref.update({ [date]:amount });
+    ref.update({ time : amount });
 };
 
 module.exports = {
