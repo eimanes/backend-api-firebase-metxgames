@@ -1,3 +1,4 @@
+
 {
     "version": 2,
     "builds": [
@@ -8,16 +9,8 @@
     ],
     "routes": [
       {
-        "handle": "filesystem"
-      },
-      {
         "src": "/(.*)",
-        "status": 200,
-        "headers": {
-          "cache-control": "public, max-age=0, must-revalidate"
-        },
-        "continue": true
+        "dest": "/"
       }
     ]
   }
-  
