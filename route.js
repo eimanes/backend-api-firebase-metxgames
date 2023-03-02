@@ -10,7 +10,7 @@ const verifyToken = controller.verifyToken;
 
 route.get("/", controller.getAll);
 
-route.get("/:gameID", verifyToken, controller.getGameID);
+route.get("/:gameID", controller.getGameID);
 
 route.get("/:gameID/:user", verifyToken, controller.getUserDetails);
   
